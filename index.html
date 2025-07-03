@@ -49,6 +49,7 @@
             font-weight: bold;
             color: white;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         .nav-links {
@@ -61,10 +62,24 @@
             color: white;
             text-decoration: none;
             transition: color 0.3s ease;
+            font-weight: 500;
         }
 
         .nav-links a:hover {
             color: #ffd700;
+        }
+
+        /* Header styles when scrolled */
+        header.scrolled .logo {
+            color: #333 !important;
+        }
+
+        header.scrolled .nav-links a {
+            color: #333 !important;
+        }
+
+        header.scrolled .nav-links a:hover {
+            color: #667eea !important;
         }
 
         /* Hero Section */
@@ -311,8 +326,19 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            nav {
+                padding: 0.5rem 0;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
             .nav-links {
-                display: none;
+                display: flex;
+                flex-direction: row;
+                gap: 1rem;
+                font-size: 0.8rem;
             }
 
             .hero h1 {
@@ -333,7 +359,7 @@
 </head>
 <body>
     <!-- Header -->
-    <header>
+    <header id="header">
         <nav class="container">
             <a href="#" class="logo">Ayun</a>
             <ul class="nav-links">
@@ -482,13 +508,15 @@
 
         // Header background change on scroll
         window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
+            const header = document.getElementById('header');
             if (window.scrollY > 100) {
                 header.style.background = 'rgba(255, 255, 255, 0.95)';
                 header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+                header.classList.add('scrolled');
             } else {
                 header.style.background = 'rgba(255, 255, 255, 0.1)';
                 header.style.boxShadow = 'none';
+                header.classList.remove('scrolled');
             }
         });
 
